@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Arbor.KVConfiguration.Core" Version="0.16.2" />
     <PackageReference Include="Arbor.KVConfiguration.JsonConfiguration" Version="0.16.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

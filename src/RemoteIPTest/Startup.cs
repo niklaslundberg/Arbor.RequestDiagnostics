@@ -80,6 +80,8 @@ namespace RemoteIPTest
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseMvc();
         }
     }
