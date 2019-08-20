@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using Arbor.KVConfiguration.Core;
+using Arbor.KVConfiguration.Core.Extensions.EnvironmentVariables;
 using Arbor.KVConfiguration.JsonConfiguration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,13 +40,15 @@ namespace RemoteIPTest
 
             string configFile = Environment.GetEnvironmentVariable("config");
 
-            IKeyValueConfiguration keyValueConfiguration = NoConfiguration.Empty;
+            AppSettingsBuilder builder = KeyValueConfigurationManager.Add(new EnvironmentVariableKeyValueConfigurationSource());
 
             if (!string.IsNullOrWhiteSpace(configFile) && File.Exists(configFile))
             {
-                keyValueConfiguration = KeyValueConfigurationManager
-                    .Add(new JsonKeyValueConfiguration(configFile, false)).Build();
+                builder = builder
+                    .Add(new JsonKeyValueConfiguration(configFile, false));
             }
+
+            IKeyValueConfiguration keyValueConfiguration = builder.Build();
 
             string limitKey = "limit";
             string proxyKey = "proxy";
